@@ -61,6 +61,9 @@ for fold_idx, (train_idx, test_idx) in enumerate(skf.split(X, y)):
     # Teste o modelo
     y_pred = modelo.predict(X_test)
 
+    cmnormalize = confusion_matrix(y_test, y_pred, normalize='true')
+    print(cmnormalize)
+
     # Crie a matriz de confusão
     cm = confusion_matrix(y_test, y_pred)
     
