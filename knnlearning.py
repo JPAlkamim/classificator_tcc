@@ -11,28 +11,31 @@ scores = []
 precisions = []
 f1s = []
 
-# Defina as classes
-classes = ['Boa', 'CascaGrossa', 'Podre', 'Praga', 'Verde']
+# # Defina as classes
+# classes = ['Boa', 'CascaGrossa', 'Podre', 'Praga', 'Verde']
 
-# Defina o número de atributos em cada arquivo
-num_atributos = 256
+# # Defina o número de atributos em cada arquivo
+# num_atributos = 256
 
-# Inicialize as matrizes de dados X e os rótulos y
-X = np.zeros((0, num_atributos))
-y = np.zeros((0,))
+# # Inicialize as matrizes de dados X e os rótulos y
+# X = np.zeros((0, num_atributos))
+# y = np.zeros((0,))
 
-# Percorra cada classe e leia os arquivos
-for classe_idx, classe in enumerate(classes):
-    print(classe)
-    # Obtenha uma lista de todos os arquivos na pasta
-    files = os.listdir(f'variosFold/Resultado3/{classe}')
-    # Percorra cada arquivo na pasta
-    for file in files:
-        # Leia o arquivo
-        data = np.loadtxt(f'variosFold/Resultado3/{classe}/{file}')
-        # Adicione os dados à matriz X e o rótulo da classe à matriz y
-        X = np.vstack((X, data))
-        y = np.append(y, classe_idx)
+# # Percorra cada classe e leia os arquivos
+# for classe_idx, classe in enumerate(classes):
+#     print(classe)
+#     # Obtenha uma lista de todos os arquivos na pasta
+#     files = os.listdir(f'variosFold/Resultado3/{classe}')
+#     # Percorra cada arquivo na pasta
+#     for file in files:
+#         # Leia o arquivo
+#         data = np.loadtxt(f'variosFold/Resultado3/{classe}/{file}')
+#         # Adicione os dados à matriz X e o rótulo da classe à matriz y
+#         X = np.vstack((X, data))
+#         y = np.append(y, classe_idx)
+
+X = np.load('Banco/X3.npy')
+y = np.load('Banco/y3.npy')
 
 # Defina o número de folds da validação cruzada
 num_folds = 10
@@ -51,7 +54,7 @@ for fold_idx, (train_idx, test_idx) in enumerate(skf.split(X, y)):
     X_test, y_test = X[test_idx], y[test_idx]
     
     # Treine o modelo
-    modelo = KNeighborsClassifier(n_neighbors=11)
+    modelo = KNeighborsClassifier(n_neighbors=3)
     modelo.fit(X_train, y_train)
 
     # Armazene as pontuações do modelo
@@ -60,9 +63,6 @@ for fold_idx, (train_idx, test_idx) in enumerate(skf.split(X, y)):
 
     # Teste o modelo
     y_pred = modelo.predict(X_test)
-
-    cmnormalize = confusion_matrix(y_test, y_pred, normalize='true')
-    print(cmnormalize)
 
     # Crie a matriz de confusão
     cm = confusion_matrix(y_test, y_pred)
