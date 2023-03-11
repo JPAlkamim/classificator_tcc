@@ -29,6 +29,9 @@ for classe_idx, classe in enumerate(classes):
         X = np.vstack((X, data))
         y = np.append(y, classe_idx)
 
+print(f'Tamanho da matriz X: {X.shape}')
+print(f'Tamanho da matriz y: {y.shape}')
+
 # Salve os dados em arquivos
-np.save('Banco/X9.npy', X)
-np.save('Banco/y9.npy', y)
+# np.save('Banco/X9.npy', X)
+# np.save('Banco/y9.npy', y)
