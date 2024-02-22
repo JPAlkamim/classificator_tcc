@@ -2,14 +2,17 @@
 
 Todos os códigos utilizados para a obtenção dos resultados
 
+## Biblioteca necessária
+
+```bash
+pip install -U scikit-learn
+```
+
 ## Pastas
 
 Todas as pastas de cada classificador se encontram com seus respectivos nomes: KNN e SVM.
 Dentro da pasta do LPQ se encontra o algoritmo em MATLAB que extraiu todas as características das laranjas.
 
-```bash
-pip install foobar
-```
 
 ## Uso
 
