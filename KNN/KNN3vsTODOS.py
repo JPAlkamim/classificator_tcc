@@ -5,15 +5,15 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import StratifiedKFold
 import seaborn as sns
 
-X9 = np.load('Banco/X3.npy')
-y9 = np.load('Banco/y3.npy')
+X3 = np.load('Banco/X3.npy')
+y3 = np.load('Banco/y3.npy')
 
 # Verificar se há mais de uma classe no conjunto de dados
 
-X9 = X9[y9 != 4]
-y9 = y9[y9 != 4]
+X3 = X3[y3 != 4]
+y3 = y3[y3 != 4]
 
-num_classes = len(np.unique(y9))
+num_classes = len(np.unique(y3))
 print(f"O conjunto de dados possui {num_classes} classes.")
 
 if num_classes > 1:
@@ -24,11 +24,11 @@ if num_classes > 1:
 
     skf = StratifiedKFold(n_splits=10, shuffle=True, random_state=42)
 
-    for class_label in np.unique(y9):
+    for class_label in np.unique(y3):
         print(f"\nClass {class_label} vs Todas as Outras Classes")
 
-        # Criar uma cópia dos rótulos originais para não modificar o y9 original
-        y_copy = y9.copy()
+        # Criar uma cópia dos rótulos originais para não modificar o y3 original
+        y_copy = y3.copy()
 
         # Definir a classe atual como 1 e todas as outras como 0
         y_copy_binary = np.where(y_copy == class_label, 1, 0)
@@ -38,8 +38,8 @@ if num_classes > 1:
         recall_scores = []
         f1_scores = []
 
-        for train_index, test_index in skf.split(X9, y_copy_binary):
-            X_train, X_test = X9[train_index], X9[test_index]
+        for train_index, test_index in skf.split(X3, y_copy_binary):
+            X_train, X_test = X3[train_index], X3[test_index]
             y_train, y_test = y_copy_binary[train_index], y_copy_binary[test_index]
 
             knn = KNeighborsClassifier(n_neighbors=k_value)
@@ -70,8 +70,8 @@ if num_classes > 1:
         # Todas as Outras Classes vs Classe
         print(f"\nTodas as Outras Classes vs Class {class_label}")
 
-        # Criar uma cópia dos rótulos originais para não modificar o y9 original
-        y_copy = y9.copy()
+        # Criar uma cópia dos rótulos originais para não modificar o y3 original
+        y_copy = y3.copy()
 
         # Definir a classe atual como 0 e a classe 'class_label' como 1
         y_copy_binary = np.where(y_copy == class_label, 0, 1)
@@ -81,8 +81,8 @@ if num_classes > 1:
         recall_scores = []
         f1_scores = []
 
-        for train_index, test_index in skf.split(X9, y_copy_binary):
-            X_train, X_test = X9[train_index], X9[test_index]
+        for train_index, test_index in skf.split(X3, y_copy_binary):
+            X_train, X_test = X3[train_index], X3[test_index]
             y_train, y_test = y_copy_binary[train_index], y_copy_binary[test_index]
 
             knn = KNeighborsClassifier(n_neighbors=k_value)

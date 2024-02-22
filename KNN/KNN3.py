@@ -6,13 +6,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
 
-X9 = np.load('Banco/X3.npy')
-y9 = np.load('Banco/y3.npy')
+X3 = np.load('Banco/X3.npy')
+y3 = np.load('Banco/y3.npy')
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X9, y9, test_size=0.3, random_state=42)
+    X3, y3, test_size=0.3, random_state=42)
 
-print(f'Número total de classes: {len(np.unique(y9))}')
+print(f'Número total de classes: {len(np.unique(y3))}')
 # Escolhe o valor de n_neighbors
 k_value = 3
 
